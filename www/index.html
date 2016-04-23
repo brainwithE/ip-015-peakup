@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<!-- CSP support mode (required for Windows Universal apps): https://docs.angularjs.org/api/ng/directive/ngCsp -->
+<html lang="en" ng-app="app" ng-csp>
+<head>
+    <meta charset="utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+
+    <!-- JS dependencies (order matters!) -->
+    <script src="scripts/platformOverrides.js"></script>
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/onsen/js/onsenui.js"></script>
+
+    <!-- CSS dependencies -->
+    <link rel="stylesheet" href="lib/onsen/css/onsenui.css" />
+    <link rel="stylesheet" href="lib/onsen/css/onsen-css-components-blue-basic-theme.css" />
+
+    <!-- CSP support mode (required for Windows Universal apps) -->
+    <link rel="stylesheet" href="lib/angular/angular-csp.css" />
+
+
+    <!-- --------------- App init --------------- -->
+
+    <title>Onsen UI Sliding Menu</title>
+
+    <script>
+        angular.module('app', ['onsen']);
+    </script>
+
+    <style>
+        .page--menu-page__background {
+            background-color: #333;
+        }
+
+        .page--menu-page__content {
+            color: white;
+        }
+
+        .menu-close,
+        .menu-close > .toolbar-button {
+            color: #999;
+        }
+
+        .menu-list,
+        .menu-item:first-child,
+        .menu-item:last-child,
+        .menu-item {
+            background-color: transparent;
+            background-image: none !important;
+            border-color: transparent;
+            color: #fff;
+        }
+
+        .menu-item {
+            padding: 0 0 0 20px;
+            line-height: 52px;
+            height: 52px;
+            text-shadow: rgba(0, 0, 0, 0.4) 0px 1px 0px;
+        }
+
+            .menu-item:active {
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+
+        .menu-notification {
+            display: inline-block;
+            margin-top: 12px;
+            font-size: 14px;
+            height: 16px;
+            line-height: 16px;
+            min-width: 16px;
+            font-weight: 600;
+        }
+
+        .bottom-menu-list,
+        .bottom-menu-item:first-child,
+        .bottom-menu-item:last-child,
+        .bottom-menu-item {
+            border-color: #393939;
+            background-color: transparent;
+            background-image: none !important;
+            color: #ccc;
+        }
+
+            .bottom-menu-item:active {
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+
+        /*main logo*/
+        .main-logo{
+            height: 70%; margin-top: 4%; float: left;
+        }
+
+        /* search bar */
+        .search-input{
+            margin-top: 5px;
+        }
+
+        .buddy {
+          display: none;
+          color: #fff;
+          width: 90%;
+          height: auto;
+          border-bottom: 1px solid gray;
+          padding: 5%;
+          top: 0;
+          right: 0;
+          left: 0;
+          position: absolute;
+          cursor: hand;
+        }
+        .rotate-left {
+          transition: 1s;
+          margin-left: 400px;
+          cursor: e-resize;
+          opacity: 0;
+        }
+        .rotate-right {
+          transition: 1s;
+          opacity: 0;
+          margin-left: -400px;
+          cursor: w-resize;
+        }
+        .avatar {
+          background: #222;
+          width: 100%;
+          height: auto;
+          display: block;
+          background-size: 100% auto !important;
+          background-position: center;
+         background-repeat: no-repeat;
+        }
+        .like {
+          border-radius: 5px;
+          padding: 5px 10px;
+          border: 2px solid green;
+          color: green;
+          text-transform: uppercase;
+          font-size: 15px;
+          position: absolute;
+          top: 50px;
+          right: 40px;
+          text-shadow: none;
+        }
+        .dislike {
+          border-radius: 5px;
+          padding: 5px 10px;
+          border: 2px solid red;
+          color: red;
+          text-transform: uppercase;
+          font-size: 15px;
+          position: absolute;
+          top: 50px;
+          left: 40px;
+          text-shadow: none;
+        }
+
+        /*ons carousel*/
+        ons-carousel-item {
+          display: table;
+          text-align: center;
+          background-color: white !important;
+          padding: 15% 5%;
+          width: 90% !important;
+        }
+
+        .item-label {
+          display: table-cell;
+          vertical-align: middle;
+          color: white;
+          line-height: 1;
+          font-size: 48px;
+          font-weight: bold;
+        }
+
+        .cover-label {
+          text-align: center;
+          position: absolute;
+          left: 0px;
+          width: 100%;
+          bottom: 10px;
+          color: #1f1f1f;
+        }
+
+        /*login form*/
+
+        .login-form {
+          text-align: center;
+          width: 80%;
+          margin: 60px auto 0;
+        }
+
+        input[type=email], input[type=password] {
+          display: block;
+          width: 100%;
+          margin: 0 auto;
+          outline: none;
+          height: 100%;
+          padding-top: 15px;
+          padding-bottom: 16px;
+        }
+
+        .login-button {
+          width: 100%;
+          margin: 0 auto;
+        }
+
+        .forgot-password {
+          display: block;
+          margin: 8px auto 0 auto;
+          font-size: 14px;
+        }
+
+        /*card layout*/
+        .card-mountain{
+            padding: 5%;
+            width: 90%;
+        }
+
+        /*create event button*/
+        .create-event-button{
+            background-color: #37e288; position: fixed; bottom: 20px; right: 20px; height: 35px; width: 50px; border-radius: 100%; text-align: center; color: white; padding-top: 15px;
+        }
+
+        /*tabbing*/
+        
+        .button-bar__item > .button-bar__button{
+            color: #37e288;
+        }
+        .button-bar__item.active > .button-bar__button{
+            color: white !important;
+        }
+        .button-bar__item.active > .button-bar__button, :checked + .button-bar__button{
+            background-color: #37e288 !important;
+            color: white !important;
+        }
+        .green{
+            background-color: #37e288 !important;
+            color: white !important;
+        }
+        .normal{
+            background-color: #37e288 !important;
+            color: white !important;
+        }
+
+        /* GENERAL STYLES */
+
+        .bg-green {
+          background-color: #37e288;
+          color: white;
+        }
+
+
+        /* Header Section */
+        .round-container {
+          border-radius: 100%;
+        }
+
+        .logo {
+          width: 30px;
+          height: 30px;
+          background-color: #37e288;
+          float: left;
+          margin-top: 8px;
+        }
+
+        .home-tabs ons-button{
+          width: 100%;
+          border-radius: 0;
+          text-align: center;
+          border: none;
+        }
+        .home-tabs .left,.home-tabs .right{width: 100%; border-radius: 0;}
+        .home-tabs .center{
+          display: none;
+        }
+
+        /* List Page */
+
+        .banner {
+          height: 100px;
+          width: 100%;
+          position: absolute;
+        }
+
+        .img-container {
+          position: relative;
+        }
+
+        .card-list{position: relative; clear: both}
+
+        .lbl-pad {
+          position: absolute;
+          padding: 5px 10px;
+        }
+
+        .bg-gray {
+          background-color: gray;
+          color: white;
+        }
+
+        .bg-dark-gray {
+          background-color: #494949;
+          color: white;
+        }
+
+        .price {
+          bottom: 0;
+        }
+
+        .date {
+          top: 0;
+        }
+
+        .bg-green {
+          background-color: #37e288;
+          color: white;
+        }
+
+        p.slots {
+          color: #37e288;
+        }
+
+        p.slots:before {
+          content: 'q ';
+        }
+
+        /* Indiv Page */
+
+        .indiv-fix {
+          top: 300px !important;
+          z-index: 9999999999999 !important;
+        }
+
+        .indiv-fix ons-carousel-item {
+          padding: 0;
+          width: 100% !important;
+        }
+
+        .indiv-fix .avatar {
+          height: 100% !important;
+        }
+
+        .footer {
+          background-color: #37e288;
+          display: block;
+          width: 100%;
+          position: fixed;
+          z-index: 99999999;
+          bottom: 0;
+          margin: 0;
+          text-align: center;
+          color: white;
+          padding: 10px 0 10px;
+        }
+
+        /* Star Rating */
+
+        .rating {
+            float:left;
+            font-size: 10px !important;
+        }
+
+        /* :not(:checked) is a filter, so that browsers that don’t support :checked don’t
+           follow these rules. Every browser that supports :checked also supports :not(), so
+           it doesn’t make the test unnecessarily selective */
+        .rating:not(:checked) > input {
+            position:absolute;
+            top:-9999px;
+            clip:rect(0,0,0,0);
+        }
+
+        .rating:not(:checked) > label {
+            float:right;
+            width:1em;
+            padding:0 .1em;
+            overflow:hidden;
+            white-space:nowrap;
+            cursor:pointer;
+            font-size:200%;
+            line-height:1.2;
+            color:#ddd;
+            /*text-shadow:1px 1px #bbb, 2px 2px #666, .1em .1em .2em rgba(0,0,0,.5);*/
+        }
+
+        .rating:not(:checked) > label:before {
+            content: '★ ';
+        }
+
+        .rating > input:checked ~ label {
+            color: #f70;
+            /*text-shadow:1px 1px #c60, 2px 2px #940, .1em .1em .2em rgba(0,0,0,.5);*/
+        }
+
+        .rating:not(:checked) > label:hover,
+        .rating:not(:checked) > label:hover ~ label {
+            color: gold;
+            /*text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);*/
+        }
+
+        .rating > input:checked + label:hover,
+        .rating > input:checked + label:hover ~ label,
+        .rating > input:checked ~ label:hover,
+        .rating > input:checked ~ label:hover ~ label,
+        .rating > label:hover ~ input:checked ~ label {
+            color: #ea0;
+            /*text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);*/
+        }
+
+        .rating > label:active {
+            position:relative;
+            top:2px;
+            left:2px;
+        }
+
+        /* List Page */
+
+        .banner {
+          height: 100px;
+          width: 100%;
+          position: absolute;
+        }
+
+        .img-container {
+          position: relative;
+        }
+
+        .card-list{position: relative; clear: both}
+
+        .lbl-pad {
+          position: absolute;
+          padding: 5px 10px;
+        }
+
+        .bg-gray {
+          background-color: gray;
+          color: white;
+        }
+
+        .bg-dark-gray {
+          background-color: #494949;
+          color: white;
+        }
+
+        .price {
+          bottom: 0;
+        }
+
+        .date {
+          top: 0;
+        }
+
+        .bg-green {
+          background-color: #37e288;
+          color: white;
+        }
+
+        p.slots {
+          color: #37e288;
+        }
+
+        p.slots:before {
+          content: 'q ';
+        }
+    </style>
+
+    <script src="scripts/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <!-- Cordova reference -->
+    <script src="cordova.js"></script>
+    <script src="scripts/index.js"></script>
+    <!-- -->
+
+    <ons-sliding-menu menu-page="menu.html" main-page="login.html" side="left"
+                      var="menu" type="reveal" max-slide-distance="260px" swipeable="false">
+    </ons-sliding-menu>
+
+    <ons-template id="menu.html">
+        <ons-page modifier="menu-page">
+            <ons-toolbar modifier="transparent"></ons-toolbar>
+
+            <ons-list class="menu-list">
+                <ons-list-item class="menu-item" ng-click="menu.setMainPage('popular.html', {closeMenu: true})">
+                    <ons-icon icon="fa-plus"></ons-icon>
+                    Home
+                </ons-list-item>
+                <ons-list-item class="menu-item" ng-click="menu.setMainPage('page2.html', {closeMenu: true})">
+                    <ons-icon icon="fa-bookmark"></ons-icon>
+                    Bookmark
+                </ons-list-item>
+                <ons-list-item class="menu-item">
+                    <ons-icon icon="fa-eye"></ons-icon>
+                    Profile
+                </ons-list-item>
+                <ons-list-item class="menu-item">
+                    <ons-icon icon="fa-paper-plane"></ons-icon>
+                    Invite Friends
+                </ons-list-item>
+                <ons-list-item class="menu-item">
+                    <ons-icon icon="fa-thumbs-o-up"></ons-icon>
+                    Give us Feedback
+                </ons-list-item>
+            </ons-list>
+
+            <br>
+
+            <ons-list class="bottom-menu-list">
+                <ons-list-item class="bottom-menu-item" ng-click="menu.setMainPage('settings.html', {closeMenu: true})">
+                    Settings
+                    <div class="notification menu-notification">3</div>
+                </ons-list-item>
+
+                <ons-list-item class="bottom-menu-item" ng-click="menu.setMainPage('popular.html', {closeMenu: true})">
+                    Help
+                </ons-list-item>
+
+                <ons-list-item class="bottom-menu-item" ng-click="menu.setMainPage('login.html', {closeMenu: true})">
+                    Logout
+                </ons-list-item>
+            </ons-list>
+        </ons-page>
+    </ons-template>
+
+    <ons-template id="tab-trips.html">
+        <ons-page>
+            <ons-navigator animation="slide" var="tab.navi">
+                <ons-toolbar>
+                    <div class="left" style="width: 12%;">
+                        <ons-toolbar-button ng-click="menu.toggle()">
+                            <ons-icon icon="ion-navicon" size="28px" fixed-width="false"></ons-icon>
+                        </ons-toolbar-button>
+                    </div>
+                    <div class="center"><img ng-click="menu.setMainPage('popular.html', {closeMenu: true})" src="img/logo.png" class="main-logo" /></div>
+                    <ons-toolbar>
+                      <div class="right" style="width: 40%;">
+                        <div class="search-container" style="padding: 10px 40px;">
+                            <a href="#" ng-click="menu.setMainPage('search.html', {closeMenu: true})" style="color: #1f1f1f;"><ons-icon icon="fa-search" class="ons-icon fa-search fa fa-lg"></ons-icon></i></a>
+                        </div>
+                      </div>
+                    </ons-toolbar>
+                </ons-toolbar>
+                <ons-toolbar style="text-align: center;" class="home-tabs">
+                  <div class="left">
+                      <ons-button modifier="light" onclick="tab.navi.pushPage('popular.html');">Popular Mountain</ons-button>
+                  </div>
+                  <div class="right">
+                    <ons-button modifier="light" class="bg-green">Upcoming Trips</ons-button>
+                  </div>
+                </ons-toolbar>
+                <ons-carousel swipeable auto-scroll fullscreen var="carousel">
+                        <ons-carousel-item style="background-color: gray;" ng-click="menu.setMainPage('indiv.html', {closeMenu: true})">
+                          <img class="avatar" src="img/mount1.jpg"/>
+                          <div style="text-align: left;">
+                              <h2 style="margin-bottom: 0px;">Mt. Pulag</h2>
+                              <h4 style="margin-top: 0px;">5 listed trips</h4>
+                          </div>
+                        </ons-carousel-item>
+                        <ons-carousel-item>
+                          <img class="avatar" src="img/pulag.jpg"/>
+                        </ons-carousel-item>
+                        <ons-carousel-item>
+                          <img class="avatar" src="img/mount2.jpg"/>
+                        </ons-carousel-item>
+                        <ons-carousel-item>
+                          <img class="avatar" src="img/mount3.jpg"/>
+                        </ons-carousel-item>
+                        <ons-carousel-cover>
+                          <!-- <div class="cover-label">Swipe left or right</div> -->
+                        </ons-carousel-cover>
+                </ons-carousel>
+
+                <a ng-click="menu.setMainPage('create-event.html', {closeMenu: true})" class="create-event-button"><ons-icon icon="fa-pencil" class="ons-icon fa-pencil fa fa-lg"></ons-icon></a>
+            </ons-navigator>
+        </ons-page>
+    </ons-template>
+
+    <ons-template id="popular.html">
+        <ons-page>
+            <ons-navigator animation="slide" var="tab.navi">
+                <ons-toolbar>
+                    <div class="left" style="width: 12%;">
+                        <ons-toolbar-button ng-click="menu.toggle()">
+                            <ons-icon icon="ion-navicon" size="28px" fixed-width="false"></ons-icon>
+                        </ons-toolbar-button>
+                    </div>
+                    <div class="center"><img ng-click="menu.setMainPage('popular.html', {closeMenu: true})" src="img/logo.png" class="main-logo" /></div>
+                    <ons-toolbar>
+                      <div class="right" style="width: 40%;">
+                        <div class="search-container" style="padding: 10px 40px;">
+                            <a href="#" ng-click="menu.setMainPage('search.html', {closeMenu: true})" style="color: #1f1f1f;"><ons-icon icon="fa-search" class="ons-icon fa-search fa fa-lg"></ons-icon></i></a>
+                        </div>
+                      </div>
+                    </ons-toolbar>
+                </ons-toolbar>
+                <ons-toolbar style="text-align: center;" class="home-tabs">
+                    <div class="left">
+                        <ons-button modifier="light" class="bg-green">Popular Mountain</ons-button>
+                    </div>
+                    <div class="right">
+                        <ons-button modifier="light" onclick="tab.navi.pushPage('tab-trips.html', { animation : 'slide' });">Upcoming Trips</ons-button>
+                    </div>
+                </ons-toolbar>
+                <ons-row style="text-align: center;">
+                        <!-- <h1>HELLO</h1> -->
+                        <ons-carousel swipeable auto-scroll fullscreen var="carousel">
+                            <ons-carousel-item style="background-color: gray;" ng-click="menu.setMainPage('indiv.html', {closeMenu: true})">
+                              <img class="avatar" src="img/mount1.jpg"/>
+                              <div style="text-align: left;">
+                                  <h2 style="margin-bottom: 0px;">Mt. ApoApo</h2>
+                                  <h4 style="margin-top: 0px;">5 listed trips</h4>
+                              </div>
+                            </ons-carousel-item>
+                            <ons-carousel-item>
+                              <img class="avatar" src="img/pulag.jpg"/>
+                            </ons-carousel-item>
+                            <ons-carousel-item>
+                              <img class="avatar" src="img/mount2.jpg"/>
+                            </ons-carousel-item>
+                            <ons-carousel-item>
+                              <img class="avatar" src="img/mount3.jpg"/>
+                            </ons-carousel-item>
+                            <ons-carousel-cover>
+                              <div class="cover-label">Swipe left or right</div>
+                            </ons-carousel-cover>
+                        </ons-carousel>
+                </ons-row>
+
+                <a ng-click="menu.setMainPage('create-event.html', {closeMenu: true})" class="create-event-button"><ons-icon icon="fa-pencil" class="ons-icon fa-pencil fa fa-lg"></ons-icon></a>
+        </ons-page>
+    </ons-template>
+
+    <ons-template id="page2.html">
+        <ons-page>
+            <ons-toolbar>
+                <div class="left">
+                    <ons-toolbar-button ng-click="menu.toggle()">
+                        <ons-icon icon="ion-navicon" size="28px" fixed-width="false"></ons-icon>
+                    </ons-toolbar-button>
+                </div>
+                <div class="center">Individual Page <a href="#" ng-click="menu.setMainPage('popular.html', {closeMenu: true})">go back</a></div>
+            </ons-toolbar>
+
+
+            <ons-row style="margin-top: 100px; text-align: center;">
+                <ons-col>
+                    <ons-button modifier="light" ng-click="menu.toggleMenu()">
+                        Toggle Menu
+                    </ons-button>
+                </ons-col>
+            </ons-row>
+
+            <div class="create-event-button"><ons-icon icon="fa-pencil" class="ons-icon fa-pencil fa fa-lg"></ons-icon></div>
+
+        </ons-page>
+    </ons-template>
+
+    <ons-template id="indiv.html">
+        <ons-page>
+            <ons-toolbar>
+                    <div class="left" style="width: 12%;">
+                        <ons-toolbar-button ng-click="menu.toggle()">
+                            <ons-icon icon="ion-navicon" size="28px" fixed-width="false"></ons-icon>
+                        </ons-toolbar-button>
+                    </div>
+                    <div class="center"><img ng-click="menu.setMainPage('popular.html', {closeMenu: true})" src="img/logo.png" class="main-logo" /></div>
+                    <ons-toolbar>
+                      <div class="right" style="width: 40%;">
+                        <div class="search-container" style="padding: 10px 40px;">
+                            <a href="#" ng-click="menu.setMainPage('search.html', {closeMenu: true})" style="color: #1f1f1f;"><ons-icon icon="fa-search" class="ons-icon fa-search fa fa-lg"></ons-icon></i></a>
+                        </div>
+                      </div>
+                    </ons-toolbar>
+            </ons-toolbar>
+
+            <ons-toolbar style="text-align: center; height: 100px;" class="home-tabs" var="myNavigator">
+             <div class="left" style="max-width: 100%; background: red">
+                <div class="img-container">
+                  <img class="banner" src="img/mount2.jpg" alt="">
+                  <h4 style="margin-left: 15px;" class="lbl-pad bg-gray">Mt. Pulag Benguet<br>4/9 Level</h4>
+                </div>
+              </div>
+            </ons-toolbar>
+            <div style="z-index: 999999; position: relative; margin: 15px;">
+              <h2 style="margin-top: 100px; float: left;">5 Trips</h2>
+
+                <a ng-click="menu.setMainPage('indiv-itinerary.html', {closeMenu: true})" src="img/logo.png">
+                <div class="card-list">
+                  <div class="img-container">
+                    <img class="avatar" src="img/mount2.jpg"/>
+                    <h3 class="bg-green lbl-pad date">April 23, 2016</h3>
+                    <h2 class="bg-dark-gray lbl-pad price">P1,350.00</h2>
+                  </div>
+                </div>
+                <div class="card-details" style="text-align: left;">
+                  <h4 style="margin-bottom: 0px;">Day tour Mt. Pulag Trip</h4>
+                  <p style="margin-top: 0px;">Hosted by: John Doe</p>
+                  <p class="slots">5 hiker slots</p>
+                </div>
+                </a>
+
+                <a ng-click="menu.setMainPage('indiv-itinerary.html', {closeMenu: true})" src="img/logo.png">
+                <div class="card-list">
+                  <div class="img-container">
+                    <img class="avatar" src="img/mount2.jpg"/>
+                    <h3 class="bg-green lbl-pad date">April 23, 2016</h3>
+                    <h2 class="bg-dark-gray lbl-pad price">P1,350.00</h2>
+                  </div>
+                </div>
+                <div class="card-details" style="text-align: left;">
+                  <h4 style="margin-bottom: 0px;">Day tour Mt. Pulag Trip</h4>
+                  <p style="margin-top: 0px;">Hosted by: John Doe</p>
+                  <p class="slots">5 hiker slots</p>
+                </div>
+                </a>
+
+            </div>
+
+            <ons-row style="text-align: center;" id="tab-trip">
+
+              <!-- <h1>HELLO</h1> -->
+              <ons-carousel swipeable auto-scroll fullscreen var="carousel">
+                  <ons-carousel-item style="background-color: gray;" ng-click="menu.setMainPage('page2.html', {closeMenu: true})">
+
+                  </ons-carousel-item>
+                  <ons-carousel-item>
+                    <img class="avatar" src="img/pulag.jpg"/>
+                  </ons-carousel-item>
+                  <ons-carousel-item>
+                    <img class="avatar" src="img/mount2.jpg"/>
+                  </ons-carousel-item>
+                  <ons-carousel-item>
+                    <img class="avatar" src="img/mount3.jpg"/>
+                  </ons-carousel-item>
+                  <ons-carousel-cover>
+                    <!-- <div class="cover-label">Swipe left or right</div> -->
+                  </ons-carousel-cover>
+              </ons-carousel>
+            </ons-row>
+
+            <a ng-click="menu.setMainPage('create-event.html', {closeMenu: true})" class="create-event-button"><ons-icon icon="fa-pencil" class="ons-icon fa-pencil fa fa-lg"></ons-icon></a>
+        </ons-page>
+    </ons-template>
+
+    <ons-template id="indiv-reviews.html">
+      <ons-page>
+
+          <ons-navigator animation="slide" var="tab.navi">
+
+                <ons-toolbar>
+                    <div class="left" style="width: 12%;">
+                        <ons-toolbar-button ng-click="menu.toggle()">
+                            <ons-icon icon="ion-navicon" size="28px" fixed-width="false"></ons-icon>
+                        </ons-toolbar-button>
+                    </div>
+                    <div class="center"><img ng-click="menu.setMainPage('popular.html', {closeMenu: true})" src="img/logo.png" class="main-logo" /></div>
+                    <ons-toolbar>
+                      <div class="right" style="width: 40%;">
+                        <div class="search-container" style="padding: 10px 40px;">
+                            <a href="#" ng-click="menu.setMainPage('search.html', {closeMenu: true})" style="color: #1f1f1f;"><ons-icon icon="fa-search" class="ons-icon fa-search fa fa-lg"></ons-icon></i></a>
+                        </div>
+                      </div>
+                    </ons-toolbar>
+                </ons-toolbar>
+
+                <div style="overflow: hidden" class="indiv-fix">
+                    <ons-carousel style="height: 280px; width: 100%" swipeable auto-scroll var="carousel">
+                        <ons-carousel-item style="background-color: gray;" ng-click="menu.setMainPage('page2.html', {closeMenu: true})">
+                          <img class="avatar" src="img/mount1.jpg"/>
+                          <div style="text-align: left;">
+                              <h2 style="margin-bottom: 0px;">Mt. Kukuli</h2>
+                              <h4 style="margin-top: 0px;">10 listed trips</h4>
+                          </div>
+                        </ons-carousel-item>
+                        <ons-carousel-item>
+                          <img class="avatar" src="img/pulag.jpg"/>
+                        </ons-carousel-item>
+                        <ons-carousel-item>
+                          <img class="avatar" src="img/mount2.jpg"/>
+                        </ons-carousel-item>
+                        <ons-carousel-item>
+                          <img class="avatar" src="img/mount3.jpg"/>
+                        </ons-carousel-item>
+                        <ons-carousel-cover>
+                          <!-- <div class="cover-label">Swipe left or right</div> -->
+                        </ons-carousel-cover>
+                    </ons-carousel>
+                </div>
+
+                <ons-toolbar style="text-align: center;" class="home-tabs indiv-fix">
+                    <div class="left">
+                        <ons-button modifier="light" onclick="tab.navi.pushPage('indiv-itinerary.html', { animation : 'slide' });" >Hiking Itinerary</ons-button>
+                    </div>
+                    <div class="right">
+                        <ons-button modifier="light" class="bg-green">Guide Review</ons-button>
+                    </div>
+                </ons-toolbar>
+
+                <div style="z-index: 999999; position: relative; margin: 15px;">
+                    <ons-row>
+                    <ons-col width="30%">
+                        <div class="img-container">
+                          <img style="float: left; height: 80px; margin-top: 80px" class="round-container" src="img/reviewer.png" alt="">
+                        </div>
+                        <p style="margin-top: 164px; margin-left: 23px;">Mac</p>
+                    </ons-col>
+                    <ons-col>
+                        <p style="margin: 90px 0 0;">Very welcoming and beautiful location and apartment</p>
+                    </ons-col>
+                    </ons-row>
+                <ons-row>
+                    <ons-col width="30%">
+                        <div class="img-container">
+                          <img style="float: left; height: 80px; margin-top: 80px" class="round-container" src="https://a1.muscache.com/airbnb/static/about/resources/brian-chesky-airbnb-ceo-188-077ec4cd89ddbb42f4151a71dcabb8c5.jpg" alt="">
+                        </div>
+                        <p style="margin-top: 164px; margin-left: 25px;">Mat</p>
+                    </ons-col>
+                    <ons-col>
+                        <p style="margin: 90px 0 0;">Perfect trip! The guide was very friendly and awesome.</p>
+                    </ons-col>
+                </ons-row>
+                <ons-row>
+                    <ons-col width="30%">
+                        <div class="img-container">
+                          <img style="float: left; height: 80px; margin-top: 80px" class="round-container" src="https://a1.muscache.com/airbnb/static/about/resources/joe-gebbia-airbnb-cpo-188-2ee6b54cc07eba533460ec09ebb3d63f.jpg" alt="">
+                        </div>
+                        <p style="margin-top: 164px; margin-left: 25px;">Pat</p>
+                    </ons-col>
+                    <ons-col>
+                        <p style="margin: 90px 0 0;">Match made from heaven!</p>
+                    </ons-col>
+                </ons-row>
+
+            </div>
+
+            <div style="z-index: 999999; position: relative; margin: 15px;">
+
+                <p style="padding-bottom: 50px;"></p>
+            </div>
+
+            <h3 class="footer">P1,350 - Join the hike</h3>
+
+
+          </ons-navigator>
+        </ons-page>
+    </ons-template>
+
+    <ons-template id="indiv-itinerary.html">
+        <ons-page>
+          <ons-navigator animation="slide" var="tab.navi">
+            <ons-toolbar>
+                    <div class="left" style="width: 12%;">
+                        <ons-toolbar-button ng-click="menu.toggle()">
+                            <ons-icon icon="ion-navicon" size="28px" fixed-width="false"></ons-icon>
+                        </ons-toolbar-button>
+                    </div>
+                    <div class="center"><img ng-click="menu.setMainPage('popular.html', {closeMenu: true})" src="img/logo.png" class="main-logo" /></div>
+                    <ons-toolbar>
+                      <div class="right" style="width: 40%;">
+                        <div class="search-container" style="padding: 10px 40px;">
+                            <a href="#" ng-click="menu.setMainPage('search.html', {closeMenu: true})" style="color: #1f1f1f;"><ons-icon icon="fa-search" class="ons-icon fa-search fa fa-lg"></ons-icon></i></a>
+                        </div>
+                      </div>
+                    </ons-toolbar>
+            </ons-toolbar>
+
+            <div style="overflow: hidden" class="indiv-fix">
+              <ons-carousel style="height: 280px; width: 100%" swipeable auto-scroll var="carousel">
+                <ons-carousel-item style="background-color: gray;" ng-click="menu.setMainPage('page2.html', {closeMenu: true})">
+                  <img class="avatar" src="img/mount1.jpg"/>
+                  <div style="text-align: left;">
+                      <h2 style="margin-bottom: 0px;">Mt. Kukuli</h2>
+                      <h4 style="margin-top: 0px;">10 listed trips</h4>
+                  </div>
+                </ons-carousel-item>
+                <ons-carousel-item>
+                  <img class="avatar" src="img/pulag.jpg"/>
+                </ons-carousel-item>
+                <ons-carousel-item>
+                  <img class="avatar" src="img/mount2.jpg"/>
+                </ons-carousel-item>
+                <ons-carousel-item>
+                  <img class="avatar" src="img/mount3.jpg"/>
+                </ons-carousel-item>
+                <ons-carousel-cover>
+                  <!-- <div class="cover-label">Swipe left or right</div> -->
+                </ons-carousel-cover>
+              </ons-carousel>
+            </div>
+
+            <ons-toolbar style="text-align: center;" class="home-tabs indiv-fix">
+                <div class="left">
+                    <ons-button modifier="light" class="bg-green">Hiking Itinerary</ons-button>
+                </div>
+                <div class="right">
+                    <ons-button modifier="light" onclick="tab.navi.pushPage('indiv-reviews.html', { animation : 'slide' });">Guide Review</ons-button>
+                </div>
+            </ons-toolbar>
+
+            <div style="z-index: 999999; position: relative; margin: 15px;">
+                <ons-row>
+                  <ons-col>
+                    <h4 style="margin: 90px 0 0;">Day tour Mt. Pulag Trip</h4>
+                    <p style="margin: 0;">Hosted by: John Doe</p>
+                    <p class="slots" style="margin-top: 0">5 hiker slots</p>
+                  </ons-col>
+                  <ons-col>
+                    <div class="img-container">
+                      <img style="margin-right: 35px; float: right; height: 80px; margin-top: 80px" class="round-container" src="img/reviewer.png" alt="">
+                      <fieldset style="border: none; float: right" class="rating">
+                          <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Rocks!">5 stars</label>
+                          <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Pretty good">4 stars</label>
+                          <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="Meh">3 stars</label>
+                          <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Kinda bad">2 stars</label>
+                          <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Sucks big time">1 star</label>
+                      </fieldset>
+                    </div>
+                  </ons-col>
+              </ons-row>
+
+            </div>
+            <hr style="width: 100%">
+            <div style="z-index: 999999; position: relative; margin: 15px;">
+                <h4 style="margin: 0 0 2px">Hiking Trip Hosted by John Doe</h4>
+                <h4 style="margin: 0 0 2px">Makati, Philippines</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolorenulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+                <p >sectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+                <h3>What to bring</h3>
+                <img src="img/to-bring.png" style="width: 100%" alt="">
+                <p style="padding-bottom: 50px;"></p>
+            </div>
+
+            <h3 class="footer">P1,350 - Join the hike</h3>
+
+          </ons-navigator>
+        </ons-page>
+    </ons-template>
+
+    <ons-template id="search.html">
+        <ons-page>
+                <ons-toolbar>
+                    <div class="left" style="width: 12%;">
+                        <ons-toolbar-button ng-click="menu.toggle()">
+                            <ons-icon icon="ion-navicon" size="28px" fixed-width="false"></ons-icon>
+                        </ons-toolbar-button>
+                    </div>
+                    <div class="center" style="max-width: 80%; width: 100%">
+                        <img ng-click="menu.setMainPage('popular.html', {closeMenu: true})" src="img/logo.png" class="main-logo" style="margin-top: 7px" />
+                        <div class="search-container" style="padding: 0px 10px; width: 80%; float: left;">
+                            <input type="search" class="search-input" placeholder="Search for Mountains" ng-model="searchText"></input>
+                        </div>
+                    </div>
+                    <ons-toolbar>
+                        <!-- <div class="center" style="max-width: 70%; width: 100%">
+                                <input type="search" class="search-input" placeholder="Search for Mountains" ng-model="searchText"></input>
+                        </div> -->
+                    </ons-toolbar>
+                </ons-toolbar>
+
+
+            <ons-row style="text-align: center;">
+                <ons-col>
+                    <!-- <h1>No Results Found</h1> -->
+
+                    <div ng-init="friends = [{name:'Everest', location:'Laguna', trips: '4'},
+                         {name:'Mt. Pulag', location:'Laguna', trips: '6'},
+                         {name:'Apo', location:'Bulacan', trips: '4'},
+                         {name:'Sembrano', location:'Bulacan', trips: '5'},
+                         {name:'Gunting-gunting', location:'Bulacan', trips: '4'},
+                         {name:'Makiling', location:'Bulacan', trips: '3'}]"></div>
+
+                    <!-- <label>Search: <input ng-model="searchText"></label> -->
+                    <div ng-repeat="friend in friends | filter:searchText">
+                        <div class="card-mountain" ng-click="menu.setMainPage('page2.html', {closeMenu: true})">
+                            <img class="avatar" src="img/mount1.jpg"/>
+                            <div style="text-align: left;">
+                                <h2 style="margin-bottom: 0px;">{{friend.name}}</h2>
+                                <h4 style="margin-top: 0px;">{{friend.location}}5 listed trips</h4>
+                            </div>
+                            <hr>
+                        </div>
+                    </div>
+                    <h1 style="text-align: left; padding-left: 5%;">Other Results</h1>
+                    <div ng-repeat="friend in friends | filter:searchText">
+                        <div class="card-mountain" ng-click="menu.setMainPage('page2.html', {closeMenu: true})">
+                            <img class="avatar" src="img/mount1.jpg"/>
+                            <div style="text-align: left;">
+                                <h2 style="margin-bottom: 0px;">{{friend.name}}</h2>
+                                <h4 style="margin-top: 0px;">{{friend.location}}5 listed trips</h4>
+                            </div>
+                            <hr>
+                        </div>
+                    </div>
+                </ons-col>
+            </ons-row>
+
+            <a class="create-event-button" ng-click="menu.setMainPage('popular.html', {closeMenu: true})"><ons-icon icon="fa-pencil" class="ons-icon fa-pencil fa fa-lg"></ons-icon></a>
+
+        </ons-page>
+    </ons-template>
+
+    <ons-template id="login.html">
+        <ons-page>
+            <ons-navigator animation="slide" var="app.navi">
+                <ons-toolbar>
+                        <div class="left" style="width: 12%;">
+                            <ons-toolbar-button ng-click="menu.toggle()">
+                                <ons-icon icon="ion-navicon" size="28px" fixed-width="false"></ons-icon>
+                            </ons-toolbar-button>
+                        </div>
+                        <div class="center"><img ng-click="menu.setMainPage('popular.html', {closeMenu: true})" src="img/logo.png" class="main-logo" /></div>
+                </ons-toolbar>
+
+                <div class="login-form">
+                    <input type="email" class="text-input--underbar" placeholder="Email" value="" style="display: none;">
+                    <input type="email" class="text-input--underbar" placeholder="Email" value="">
+                    <input type="password" class="text-input--underbar" placeholder="Password" value="">
+                    <br><br>
+                    <ons-button modifier="large" class="login-button" ng-click="app.navi.pushPage('popular.html');" style="background-color: #37e288;">Log In</ons-button>
+                    <br><br>
+                    <ons-button modifier="quiet" class="forgot-password">Forgot password?</ons-button>
+                </div>
+            </ons-navigator>
+        </ons-page>
+    </ons-template>
+
+    <ons-template id="settings.html">
+        <ons-page>
+            <ons-tabbar animation="fade">
+              <ons-tab page="popular.html" active="true">
+                <ons-icon icon="ion-home"></ons-icon>
+                <span style="font-size: 14px">Home</span>
+              </ons-tab>
+              <ons-tab page="fav.html" active="true">
+                <ons-icon icon="ion-star"></ons-icon>
+                <span style="font-size: 14px">Favorites</span>
+              </ons-tab>
+              <ons-tab page="settings.html" active="true">
+                <ons-icon icon="ion-gear-a"></ons-icon>
+                <span style="font-size: 14px">Settings</span>
+              </ons-tab>
+            </ons-tabbar>
+
+            <ons-template id="home.html">
+              <h1 style="text-align: left; padding-left: 5%;">Other Results1</h1>
+            </ons-template>
+
+            <ons-template id="fav.html">
+              <h1 style="text-align: left; padding-left: 5%;">Other Results2</h1>
+            </ons-template>
+
+            <ons-template id="settings.html">
+              <h1 style="text-align: left; padding-left: 5%;">Other Results3</h1>
+            </ons-template>
+        </ons-page>
+    </ons-template>
+
+    <ons-template id="create-event.html">
+
+            <ons-toolbar>
+                    <div class="left" style="width: 12%;">
+                        <ons-toolbar-button ng-click="menu.toggle()">
+                            <ons-icon icon="ion-navicon" size="28px" fixed-width="false"></ons-icon>
+                        </ons-toolbar-button>
+                    </div>
+                    <div class="center"><img ng-click="menu.setMainPage('popular.html', {closeMenu: true})" src="img/logo.png" class="main-logo" /></div>
+                    <ons-toolbar>
+                      <div class="right" style="width: 40%;">
+                        <div class="search-container" style="padding: 10px 40px;">
+                            <a href="#" ng-click="menu.setMainPage('search.html', {closeMenu: true})" style="color: #1f1f1f;"><ons-icon icon="fa-search" class="ons-icon fa-search fa fa-lg"></ons-icon></i></a>
+                        </div>
+                      </div>
+                    </ons-toolbar>
+            </ons-toolbar>
+            <ons-toolbar>
+                    <div class="center">
+                        <div class="button-bar" style="width:100%;">
+                          <div class="button-bar__item" ng-click="app.navi.pushPage('create-event1.html');">
+                            <input type="radio" name="segment-a" checked>
+                            <button id="form-1" class="button-bar__button" style="border: 0px;">Details</button>
+                          </div>
+
+                          <div class="button-bar__item" ng-click="app.navi.pushPage('create-event2.html');">
+                            <input type="radio" name="segment-a">
+                            <button id="form-2" class="button-bar__button" style="border: 0px;">Itinerary</button>
+                          </div>
+
+                          <div class="button-bar__item" ng-click="app.navi.pushPage('create-event3.html');">
+                            <input type="radio" name="segment-a">
+                            <button id="form-3" class="button-bar__button" style="border: 0px;">Bring</button>
+                          </div>
+                        </div>
+                    </div>
+            </ons-toolbar>
+            <ons-page>
+                <ons-navigator animation="slide" var="app.navi">
+                    <div style="padding: 5%;">
+                        <div class="center"><h3 style="margin-top: 60px;">Hike Trip Information</h3></div>
+
+                        <div class="login-form">
+                            <input type="email" class="text-input--underbar" placeholder="Trip Name" value="" style="display: none;">
+                            <input type="email" class="text-input--underbar" placeholder="Select Mountain" value="">
+                            <input type="password" class="text-input--underbar" placeholder="Trip Name" value="">
+                            <br><br>
+                            <ons-button modifier="large" class="login-button" ng-click="app.navi.pushPage('create-event2.html');" onclick="$('#form-2').addClass('green');" style="background-color: #37e288;">NEXT</ons-button>
+                            <br><br>
+                        </div>
+                    </div> 
+                </ons-navigator>
+            </ons-page>
+    </ons-template>
+
+    <ons-template id="create-event1.html">
+        <div style="padding: 5%;">
+            <div class="center"><h3 style="margin-top: 60px;">Hike Trip Information</h3></div>
+
+            <div class="login-form">
+                <input type="email" class="text-input--underbar" placeholder="Trip Name" value="" style="display: none;">
+                <input type="email" class="text-input--underbar" placeholder="Select Mountain" value="">
+                <input type="password" class="text-input--underbar" placeholder="Trip Name" value="">
+                <br><br>
+                <ons-button modifier="large" class="login-button" ng-click="app.navi.pushPage('create-event2.html');" style="background-color: #37e288;">NEXT</ons-button>
+                <br><br>
+            </div>
+        </div> 
+    </ons-template>
+
+    <ons-template id="create-event2.html">
+        <div style="padding: 5%;">
+            <div class="center"><h3 style="margin-top: 60px;">Intinerary</h3></div>
+
+            <div class="login-form">
+                <input type="email" class="text-input--underbar" placeholder="Trip Name" value="" style="display: none;">
+                <input type="email" class="text-input--underbar" placeholder="Itinerary" value="">
+                <br><br>
+                <ons-button modifier="large" class="login-button" ng-click="app.navi.pushPage('create-event3.html');" onclick="$('#form-3').addClass('green');" style="background-color: #37e288;">NEXT</ons-button>
+                <br><br>
+            </div>
+        </div>
+    </ons-template>
+
+    <ons-template id="create-event3.html">
+        <div style="padding: 5%;">
+            <div class="center"><h3 style="margin-top: 60px;">What to Bring</h3></div>
+
+            <div class="login-form">
+                <input type="email" class="text-input--underbar" placeholder="Trip Name" value="" style="display: none;">
+                <input type="email" class="text-input--underbar" placeholder="List down needs" value="">
+                <br><br>
+                <ons-button modifier="large" class="login-button" ng-click="menu.setMainPage('popular.html', {closeMenu: true})" style="background-color: #37e288;">CREATE</ons-button>
+                <br><br>
+            </div>
+        </div>
+    </ons-template>
+
+    <script type="text/javascript">
+        app.controller('stepCtrl',function($scope){
+            $scope.step = 1;
+            $scope.setStep = function(step){
+               $scope.step = step;
+            }
+        });
+    </script>
+</body>
+</html>

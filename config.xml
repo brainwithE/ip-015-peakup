@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.potatocodes.peakup" version="1.7.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>PeakUp</name>
+    <description>
+        PeakUp is the first mountaineering social platform that aims to help hikers set hiking events with each other and to be guides themselves
+    </description>
+    <author email="dev@onsen.io" href="http://onsen.io">
+        Onsen UI Team
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+</widget>
