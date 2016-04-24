@@ -164,6 +164,10 @@
           width: 90% !important;
         }
 
+        ons-carousel-item p{
+            margin:5px 0 !important;
+        }
+
         .item-label {
           display: table-cell;
           vertical-align: middle;
@@ -310,6 +314,7 @@
 
         .date {
           top: 0;
+          font-size: 16px;
         }
 
         .bg-green {
@@ -322,7 +327,14 @@
         }
 
         p.slots:before {
-          content: 'q ';
+          content: "";
+          float: left;
+          width: 20px;
+          height: 20px;
+          margin: 0 5px 0 0;
+          background: url('img/hiker.png');
+          background-size: 20px 20px;
+          background-repeat: no-repeat;
         }
 
         /* Indiv Page */
@@ -446,22 +458,9 @@
           bottom: 0;
         }
 
-        .date {
-          top: 0;
-        }
+        
 
-        .bg-green {
-          background-color: #37e288;
-          color: white;
-        }
-
-        p.slots {
-          color: #37e288;
-        }
-
-        p.slots:before {
-          content: 'q ';
-        }
+       
     </style>
 
     <script src="scripts/jquery.min.js"></script>
@@ -472,6 +471,8 @@
     <!-- Cordova reference -->
     <script src="cordova.js"></script>
     <script src="scripts/index.js"></script>
+    <script src="scripts/ui-bootstrap-custom-1.3.2.min.js"></script>
+    <script src="scripts/ui-bootstrap-custom-tpls-1.3.2.min.js"></script>
     <!-- -->
 
     <ons-sliding-menu menu-page="menu.html" main-page="login.html" side="left"
@@ -551,21 +552,34 @@
                   </div>
                 </ons-toolbar>
                 <ons-carousel swipeable auto-scroll fullscreen var="carousel">
-                        <ons-carousel-item style="background-color: gray;" ng-click="menu.setMainPage('indiv.html', {closeMenu: true})">
-                          <img class="avatar" src="img/mount1.jpg"/>
-                          <div style="text-align: left;">
-                              <h2 style="margin-bottom: 0px;">Mt. Pulag</h2>
-                              <h4 style="margin-top: 0px;">5 listed trips</h4>
-                          </div>
-                        </ons-carousel-item>
-                        <ons-carousel-item>
-                          <img class="avatar" src="img/pulag.jpg"/>
-                        </ons-carousel-item>
-                        <ons-carousel-item>
-                          <img class="avatar" src="img/mount2.jpg"/>
-                        </ons-carousel-item>
-                        <ons-carousel-item>
-                          <img class="avatar" src="img/mount3.jpg"/>
+
+                        <ons-carousel-item style="background-color: gray;" ng-click="menu.setMainPage('indiv-itinerary.html', {closeMenu: true})">
+                          <div class="card-list">
+                              <div class="img-container">
+                                <img class="avatar" src="img/mount-pulag-1.jpg"/>
+                                <h3 class="bg-green lbl-pad date">April 26, 2016</h3>
+                                <h2 class="bg-dark-gray lbl-pad price">P2,500.00</h2>
+                              </div>
+                            </div>
+                            <div class="card-details" style="text-align: left;">
+                              <h4 style="margin-bottom: 0px;">Two days tour Mt. Pulag Trip via Akiki Trail</h4>
+                              <p style="margin-top: 0px;">Hosted by: John Doe</p>
+                              <p class="slots"></ons-icon>2/8 hiker slots</p>
+                            </div>
+                        </ons-carousel-item>                        
+                        <ons-carousel-item style="background-color: gray;" ng-click="menu.setMainPage('indiv-itinerary.html', {closeMenu: true})">
+                            <div class="card-list">
+                              <div class="img-container">
+                                <img class="avatar" src="img/mount-pulag-2.jpg"/>
+                                <h3 class="bg-green lbl-pad date">May 2, 2016</h3>
+                                <h2 class="bg-dark-gray lbl-pad price">P2,800.00</h2>
+                              </div>
+                            </div>
+                            <div class="card-details" style="text-align: left;">
+                              <h4 style="margin-bottom: 0px;">Mt. Pulag Trip(Ambangeg Trail)</h4>
+                              <p style="margin-top: 0px;">Hosted by: Johnny Dope</p>
+                              <p class="slots">5/10 hiker slots</p>
+                            </div>
                         </ons-carousel-item>
                         <ons-carousel-cover>
                           <!-- <div class="cover-label">Swipe left or right</div> -->
@@ -607,24 +621,72 @@
                         <!-- <h1>HELLO</h1> -->
                         <ons-carousel swipeable auto-scroll fullscreen var="carousel">
                             <ons-carousel-item style="background-color: gray;" ng-click="menu.setMainPage('indiv.html', {closeMenu: true})">
-                              <img class="avatar" src="img/mount1.jpg"/>
+                              <img class="avatar" src="img/mount-apo.jpg"/>
                               <div style="text-align: left;">
-                                  <h2 style="margin-bottom: 0px;">Mt. ApoApo</h2>
-                                  <h4 style="margin-top: 0px;">5 listed trips</h4>
+                                  <h2 style="margin-bottom: 0px;">Mt. Apo</h2>
+                                  <h4 style="margin-top: 0px;">0 listed trips</h4>
+                                  <p>Davao del Sur and North Cotabato</p>
+                                  <p>Entry point: Brgy. Mainit, Digos</p>
+                                  <p>Specs: Major Climb</p>
+                                  <p>Difficulty 7/9</p>
+                                  <p>Trail class 2-4</p>
+                                  <p>Days required / Hours to summit: 3 days / 10-11 hours</p>
                               </div>
                             </ons-carousel-item>
-                            <ons-carousel-item>
-                              <img class="avatar" src="img/pulag.jpg"/>
+                            <ons-carousel-item style="background-color: gray;" ng-click="menu.setMainPage('indiv.html', {closeMenu: true})">
+                              <img class="avatar" src="img/mount-pulag.JPG"/>
+                              <div style="text-align: left;">
+                                  <h2 style="margin-bottom: 0px;">Mt. Pulag</h2>
+                                  <h4 style="margin-top: 0px;">2 listed trips</h4>
+                                  <p>Benguet and Nueva Vizcaya</p>
+                                  <p>Entry point:  Brgy. Tinongdan, Itogon, Benguet</p>
+                                  <p>Specs: Major Climb</p>
+                                  <p>Difficulty 8/9</p>
+                                  <p>Trail class 1-4</p>
+                                  <p>Days required / Hours to summits: 4-7 days / 7-10 (U); 30-40 (P)</p>
+                              </div>
                             </ons-carousel-item>
-                            <ons-carousel-item>
-                              <img class="avatar" src="img/mount2.jpg"/>
+                            <ons-carousel-item style="background-color: gray;" ng-click="menu.setMainPage('indiv.html', {closeMenu: true})">
+                              <img class="avatar" src="img/mount-samat.jpg"/>
+                              <div style="text-align: left;">
+                                  <h2 style="margin-bottom: 0px;">Mt. Samat</h2>
+                                  <h4 style="margin-top: 0px;">0 listed trips</h4>
+                                  <p>Pilar, Bataan</p>
+                                  <p>Entry point: Brgy. Diwa, Pilar</p>
+                                  <p>Specs: Minor Climb</p>
+                                  <p>Difficulty 1/9</p>
+                                  <p>Trail class 1</p>
+                                  <p>Days required / Hours to summit: 1 day / 1 hour</p>
+                              </div>
                             </ons-carousel-item>
-                            <ons-carousel-item>
-                              <img class="avatar" src="img/mount3.jpg"/>
+                            <ons-carousel-item style="background-color: gray;" ng-click="menu.setMainPage('indiv.html', {closeMenu: true})">
+                              <img class="avatar" src="img/mount-pinatubo.jpg"/>
+                              <div style="text-align: left;">
+                                  <h2 style="margin-bottom: 0px;">Mt. Pinatubo</h2>
+                                  <h4 style="margin-top: 0px;">0 listed trips</h4>
+                                  <p>Capas, Tarlac</p>
+                                  <p>Entry point:  Brgy. Sta. Juliana, Capas, Tarlac</p>
+                                  <p>Specs: Minor Climb</p>
+                                  <p>Difficulty 2/9</p>
+                                  <p>Trail class 1</p>
+                                  <p>Days required / Hours to crater: 1 day, 45 min 4×4 + 2 hrs hike</p>
+                              </div>
                             </ons-carousel-item>
-                            <ons-carousel-cover>
-                              <div class="cover-label">Swipe left or right</div>
-                            </ons-carousel-cover>
+                            <ons-carousel-item style="background-color: gray;" ng-click="menu.setMainPage('indiv.html', {closeMenu: true})">
+                              <img class="avatar" src="img/mount-makiling.jpg"/>
+                              <div style="text-align: left;">
+                                  <h2 style="margin-bottom: 0px;">Mt. Makiling</h2>
+                                  <h4 style="margin-top: 0px;">0 listed trips</h4>
+                                  <p>Sto. Tomas, Batangas and Los Banos, Laguna</p>
+                                  <p>Entry point:  Sitio Jordan, Brgy. San Miguel, Sto. Tomas</p>
+                                  <p>Specs: Major Climb</p>
+                                  <p>Difficulty 5/9</p>
+                                  <p>Trail class 3 with roped segments</p>
+                                  <p>Hours to Peak 2 / days required: 1-2 days / 5-8 Hours</p>
+                              </div>
+                            </ons-carousel-item>
+                            
+                            
                         </ons-carousel>
                 </ons-row>
 
@@ -679,40 +741,40 @@
              <div class="left" style="max-width: 100%; background: red">
                 <div class="img-container">
                   <img class="banner" src="img/mount2.jpg" alt="">
-                  <h4 style="margin-left: 15px;" class="lbl-pad bg-gray">Mt. Pulag Benguet<br>4/9 Level</h4>
+                  <h4 style="margin-left: 15px;" class="lbl-pad bg-gray">Mt. Pulag Benguet<br>8/9 Level</h4>
                 </div>
               </div>
             </ons-toolbar>
             <div style="z-index: 999999; position: relative; margin: 15px;">
-              <h2 style="margin-top: 100px; float: left;">5 Trips</h2>
+              <h2 style="margin-top: 100px; float: left;">3 Trips</h2>
 
                 <a ng-click="menu.setMainPage('indiv-itinerary.html', {closeMenu: true})" src="img/logo.png">
                 <div class="card-list">
                   <div class="img-container">
-                    <img class="avatar" src="img/mount2.jpg"/>
-                    <h3 class="bg-green lbl-pad date">April 23, 2016</h3>
-                    <h2 class="bg-dark-gray lbl-pad price">P1,350.00</h2>
+                    <img class="avatar" src="img/mount-pulag-1.jpg"/>
+                    <h3 class="bg-green lbl-pad date">April 26, 2016</h3>
+                    <h2 class="bg-dark-gray lbl-pad price">P2,500.00</h2>
                   </div>
                 </div>
                 <div class="card-details" style="text-align: left;">
-                  <h4 style="margin-bottom: 0px;">Day tour Mt. Pulag Trip</h4>
+                  <h4 style="margin-bottom: 0px;">Two days tour Mt. Pulag Trip via Akiki Trail</h4>
                   <p style="margin-top: 0px;">Hosted by: John Doe</p>
-                  <p class="slots">5 hiker slots</p>
+                  <p class="slots"></ons-icon>2/8 hiker slots</p>
                 </div>
                 </a>
 
                 <a ng-click="menu.setMainPage('indiv-itinerary.html', {closeMenu: true})" src="img/logo.png">
                 <div class="card-list">
                   <div class="img-container">
-                    <img class="avatar" src="img/mount2.jpg"/>
-                    <h3 class="bg-green lbl-pad date">April 23, 2016</h3>
-                    <h2 class="bg-dark-gray lbl-pad price">P1,350.00</h2>
+                    <img class="avatar" src="img/mount-pulag-2.jpg"/>
+                    <h3 class="bg-green lbl-pad date">May 2, 2016</h3>
+                    <h2 class="bg-dark-gray lbl-pad price">P2,800.00</h2>
                   </div>
                 </div>
                 <div class="card-details" style="text-align: left;">
-                  <h4 style="margin-bottom: 0px;">Day tour Mt. Pulag Trip</h4>
-                  <p style="margin-top: 0px;">Hosted by: John Doe</p>
-                  <p class="slots">5 hiker slots</p>
+                  <h4 style="margin-bottom: 0px;">Mt. Pulag Trip(Ambangeg Trail)</h4>
+                  <p style="margin-top: 0px;">Hosted by: Johnny Dope</p>
+                  <p class="slots">5/10 hiker slots</p>
                 </div>
                 </a>
 
@@ -799,7 +861,7 @@
                 </ons-toolbar>
 
                 <div style="z-index: 999999; position: relative; margin: 15px;">
-                    <ons-row>
+                    <ons-row style="height:150px;">
                     <ons-col width="30%">
                         <div class="img-container">
                           <img style="float: left; height: 80px; margin-top: 80px" class="round-container" src="img/reviewer.png" alt="">
@@ -810,7 +872,7 @@
                         <p style="margin: 90px 0 0;">Very welcoming and beautiful location and apartment</p>
                     </ons-col>
                     </ons-row>
-                <ons-row>
+                <ons-row  style="height:150px;">
                     <ons-col width="30%">
                         <div class="img-container">
                           <img style="float: left; height: 80px; margin-top: 80px" class="round-container" src="https://a1.muscache.com/airbnb/static/about/resources/brian-chesky-airbnb-ceo-188-077ec4cd89ddbb42f4151a71dcabb8c5.jpg" alt="">
@@ -821,7 +883,7 @@
                         <p style="margin: 90px 0 0;">Perfect trip! The guide was very friendly and awesome.</p>
                     </ons-col>
                 </ons-row>
-                <ons-row>
+                <ons-row  style="height:150px;">
                     <ons-col width="30%">
                         <div class="img-container">
                           <img style="float: left; height: 80px; margin-top: 80px" class="round-container" src="https://a1.muscache.com/airbnb/static/about/resources/joe-gebbia-airbnb-cpo-188-2ee6b54cc07eba533460ec09ebb3d63f.jpg" alt="">
@@ -869,20 +931,20 @@
             <div style="overflow: hidden" class="indiv-fix">
               <ons-carousel style="height: 280px; width: 100%" swipeable auto-scroll var="carousel">
                 <ons-carousel-item style="background-color: gray;" ng-click="menu.setMainPage('page2.html', {closeMenu: true})">
-                  <img class="avatar" src="img/mount1.jpg"/>
+                  <img class="avatar" src="img/mount-pulag.jpg"/>
                   <div style="text-align: left;">
                       <h2 style="margin-bottom: 0px;">Mt. Kukuli</h2>
                       <h4 style="margin-top: 0px;">10 listed trips</h4>
                   </div>
                 </ons-carousel-item>
                 <ons-carousel-item>
+                  <img class="avatar" src="img/mount-pulag-1.jpg"/>
+                </ons-carousel-item>
+                <ons-carousel-item>
+                  <img class="avatar" src="img/mount-pulag-2.jpg"/>
+                </ons-carousel-item>
+                <ons-carousel-item>
                   <img class="avatar" src="img/pulag.jpg"/>
-                </ons-carousel-item>
-                <ons-carousel-item>
-                  <img class="avatar" src="img/mount2.jpg"/>
-                </ons-carousel-item>
-                <ons-carousel-item>
-                  <img class="avatar" src="img/mount3.jpg"/>
                 </ons-carousel-item>
                 <ons-carousel-cover>
                   <!-- <div class="cover-label">Swipe left or right</div> -->
@@ -902,9 +964,9 @@
             <div style="z-index: 999999; position: relative; margin: 15px;">
                 <ons-row>
                   <ons-col>
-                    <h4 style="margin: 90px 0 0;">Day tour Mt. Pulag Trip</h4>
+                    <h4 style="margin: 90px 0 0;">Two days tour Mt. Pulag Trip via Akiki Trail</h4>
                     <p style="margin: 0;">Hosted by: John Doe</p>
-                    <p class="slots" style="margin-top: 0">5 hiker slots</p>
+                    <p class="slots" style="margin-top: 0">2/8 hiker slots</p>
                   </ons-col>
                   <ons-col>
                     <div class="img-container">
@@ -925,14 +987,51 @@
             <div style="z-index: 999999; position: relative; margin: 15px;">
                 <h4 style="margin: 0 0 2px">Hiking Trip Hosted by John Doe</h4>
                 <h4 style="margin: 0 0 2px">Makati, Philippines</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolorenulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
-                <p >sectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+                <p>Day 0<br>
+                2300 Bus from Manila to Baguio City
+                <br><br>
+                
+                Day 1<br>
+                0500 ETA Baguio City. Breakfast then proceed to jeepney terminal/chartered jeep.<br>
+                0700 Take chartered jeepney to Akiki, Kabayan. Early lunch at any stopover.<br>
+                1200 Arrival at Akiki jump-off; commence trek on steep trail.<br>
+                1300 ETA Ranger Station. Register. Secure guides.<br>
+                1330 Start 2-hour trek to Eddet River<br>
+                1630 ETA Eddet River; set up camp.<br>
+                1800 Dinner / socials<br>
+                <br><br>
+                
+                Day 2<br>
+                0400 Wake up call. Prepare breakfast.<br>
+                0430 Breakfast<br>
+                0530 Break camp<br>
+                0700 Start 3-4 hr trek to Marlboro Country<br>
+                1100 Have early lunch at Marlboro country (water source)<br>
+                1200 Commence 3-hour trek through montane forest.<br>
+                1430 End of forest line (2600 MASL); Reach Grassland.<br>
+                1600 ETA Saddle campsite; set up camp.<br>
+                1730 Assault to summit. Sunset.<br>
+                1900 Dinner / socials<br>
+                <br><br>
+
+                Day 3<br>
+                0530 Early morning trek to summit<br>
+                0545 Arrival at summit just in time for sunrise<br>
+                0630 Back at campsite; breakfast<br>
+                0730 Break camp<br>
+                0800 Start descent via Ambangeg trail<br>
+                0900 From Camp 2, resume descent to Babadak Ranger Station<br>
+                1130 ETA Ranger Stn; Settle guide fees; jeepney descent<br>
+                1230 At DENR-PAO; tidy up and log out.<br>
+                1400 Head back to Baguio City<br>
+                1700 ETA Baguio City. Buy return tickets. Dinner.<br>
+                1900 Head back to Manila</p>
                 <h3>What to bring</h3>
                 <img src="img/to-bring.png" style="width: 100%" alt="">
                 <p style="padding-bottom: 50px;"></p>
             </div>
 
-            <h3 class="footer">P1,350 - Join the hike</h3>
+            <h3 class="footer">P2,500 - Join the hike</h3>
 
           </ons-navigator>
         </ons-page>
@@ -1120,6 +1219,11 @@
                 <input type="email" class="text-input--underbar" placeholder="Trip Name" value="" style="display: none;">
                 <input type="email" class="text-input--underbar" placeholder="Select Mountain" value="">
                 <input type="password" class="text-input--underbar" placeholder="Trip Name" value="">
+                <ons-row>
+                  <ons-col width="50px"><ons-icon icon="fa-twitter"></ons-icon></ons-col>
+                  <ons-col>Text</ons-col>
+                </ons-row>
+                <button class="button button--outline">Button</button><button class="button button--outline">Button</button>
                 <br><br>
                 <ons-button modifier="large" class="login-button" ng-click="app.navi.pushPage('create-event2.html');" style="background-color: #37e288;">NEXT</ons-button>
                 <br><br>
