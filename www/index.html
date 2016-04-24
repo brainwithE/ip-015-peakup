@@ -458,7 +458,17 @@
           bottom: 0;
         }
 
-        
+        /*forms photo upload*/
+        .photo-upload{
+            background-color: #e8e8e8;
+            color: #777777;
+            font-size: 32px;
+            text-align: center;
+            height: 200px;
+            margin-top: 46px;
+            padding-top: 100px;
+            width: 100%;
+        }
 
        
     </style>
@@ -1195,13 +1205,20 @@
             </ons-toolbar>
             <ons-page>
                 <ons-navigator animation="slide" var="app.navi">
+                    <div class="photo-upload">ADD A PHOTO</div>
                     <div style="padding: 5%;">
-                        <div class="center"><h3 style="margin-top: 60px;">Hike Trip Information</h3></div>
+                        <div class="center"><h3 style="margin-top: 10px;">Hike Trip Information</h3></div>
 
-                        <div class="login-form">
+                        <div class="login-form" style="margin-top: 0px;">
                             <input type="email" class="text-input--underbar" placeholder="Trip Name" value="" style="display: none;">
                             <input type="email" class="text-input--underbar" placeholder="Select Mountain" value="">
-                            <input type="password" class="text-input--underbar" placeholder="Trip Name" value="">
+                            <input type="email" class="text-input text-input--underbar" placeholder="Name your trip" value="">
+                            <ons-row>
+                              <ons-col><button class="button button--outline" style="width: 100%; border: 1px solid #37e288; border-radius: 0px; color: #37e288; height: 75px; margin-top: 30px;">Start Date</button></ons-col>
+                              <ons-col><button class="button button--outline" style="width: 100%; border: 1px solid #37e288; border-radius: 0px; color: #37e288; height: 75px; margin-top: 30px;">End Date</button></ons-col>
+                            </ons-row>
+                            <input type="email" class="text-input text-input--underbar" placeholder="Number of hikers" value="" style="margin-top: 30px;">
+                            <input type="email" class="text-input text-input--underbar" placeholder="Budget" value="">
                             <br><br>
                             <ons-button modifier="large" class="login-button" ng-click="app.navi.pushPage('create-event2.html');" onclick="$('#form-2').addClass('green');" style="background-color: #37e288;">NEXT</ons-button>
                             <br><br>
@@ -1212,36 +1229,35 @@
     </ons-template>
 
     <ons-template id="create-event1.html">
-        <div style="padding: 5%;">
-            <div class="center"><h3 style="margin-top: 60px;">Hike Trip Information</h3></div>
+                    <div class="photo-upload">ADD A PHOTO</div>
+                    <div style="padding: 5%;">
+                        <div class="center"><h3 style="margin-top: 10px;">Hike Trip Information</h3></div>
 
-            <div class="login-form">
-                <input type="email" class="text-input--underbar" placeholder="Trip Name" value="" style="display: none;">
-                <input type="email" class="text-input--underbar" placeholder="Select Mountain" value="">
-                <input type="password" class="text-input--underbar" placeholder="Trip Name" value="">
-                <ons-row>
-                  <ons-col width="50px"><ons-icon icon="fa-twitter"></ons-icon></ons-col>
-                  <ons-col>Text</ons-col>
-                </ons-row>
-                <button class="button button--outline">Button</button><button class="button button--outline">Button</button>
-                <br><br>
-                <ons-button modifier="large" class="login-button" ng-click="app.navi.pushPage('create-event2.html');" style="background-color: #37e288;">NEXT</ons-button>
-                <br><br>
-            </div>
-        </div> 
+                        <div class="login-form" style="margin-top: 0px;">
+                            <input type="email" class="text-input--underbar" placeholder="Trip Name" value="" style="display: none;">
+                            <input type="email" class="text-input--underbar" placeholder="Select Mountain" value="">
+                            <input type="email" class="text-input text-input--underbar" placeholder="Name your trip" value="">
+                            <ons-row>
+                              <ons-col><button class="button button--outline" style="width: 100%; border: 1px solid #37e288; border-radius: 0px; color: #37e288; height: 75px; margin-top: 30px;">Start Date</button></ons-col>
+                              <ons-col><button class="button button--outline" style="width: 100%; border: 1px solid #37e288; border-radius: 0px; color: #37e288; height: 75px; margin-top: 30px;">End Date</button></ons-col>
+                            </ons-row>
+                            <input type="email" class="text-input text-input--underbar" placeholder="Number of hikers" value="" style="margin-top: 30px;">
+                            <input type="email" class="text-input text-input--underbar" placeholder="Budget" value="">
+                            <br><br>
+                            <ons-button modifier="large" class="login-button" ng-click="app.navi.pushPage('create-event2.html');" onclick="$('#form-2').addClass('green');" style="background-color: #37e288;">NEXT</ons-button>
+                            <br><br>
+                        </div>
+                    </div> 
     </ons-template>
 
     <ons-template id="create-event2.html">
         <div style="padding: 5%;">
             <div class="center"><h3 style="margin-top: 60px;">Intinerary</h3></div>
-
-            <div class="login-form">
                 <input type="email" class="text-input--underbar" placeholder="Trip Name" value="" style="display: none;">
-                <input type="email" class="text-input--underbar" placeholder="Itinerary" value="">
+                <textarea class="textarea" rows="3" placeholder="Itinerary" style="width: 100%; height: 400px;"></textarea>
                 <br><br>
                 <ons-button modifier="large" class="login-button" ng-click="app.navi.pushPage('create-event3.html');" onclick="$('#form-3').addClass('green');" style="background-color: #37e288;">NEXT</ons-button>
                 <br><br>
-            </div>
         </div>
     </ons-template>
 
