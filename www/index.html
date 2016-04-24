@@ -223,7 +223,7 @@
 
         /*create event button*/
         .create-event-button{
-            background-color: #37e288; position: fixed; bottom: 20px; right: 20px; height: 35px; width: 50px; border-radius: 100%; text-align: center; color: white; padding-top: 15px;
+            background-color: #37e288; position: fixed; z-index: 999; bottom: 20px; right: 20px; height: 35px; width: 50px; border-radius: 100%; text-align: center; color: white; padding-top: 15px;
         }
 
         /*tabbing*/
@@ -469,8 +469,6 @@
             padding-top: 100px;
             width: 100%;
         }
-
-       
     </style>
 
     <script src="scripts/jquery.min.js"></script>
@@ -535,6 +533,109 @@
         </ons-page>
     </ons-template>
 
+    <ons-template id="popular.html">
+        <ons-page>
+            <ons-navigator animation="slide" var="tab.navi">
+                <ons-toolbar>
+                    <div class="left" style="width: 12%;">
+                        <ons-toolbar-button ng-click="menu.toggle()">
+                            <ons-icon icon="ion-navicon" size="28px" fixed-width="false"></ons-icon>
+                        </ons-toolbar-button>
+                    </div>
+                    <div class="center"><img ng-click="menu.setMainPage('popular.html', {closeMenu: true})" src="img/logo.png" class="main-logo" /></div>
+                    <ons-toolbar>
+                      <div class="right" style="width: 40%;">
+                        <div class="search-container" style="padding: 10px 40px;">
+                            <a href="#" ng-click="menu.setMainPage('search.html', {closeMenu: true})" style="color: #1f1f1f;"><ons-icon icon="fa-search" class="ons-icon fa-search fa fa-lg"></ons-icon></i></a>
+                        </div>
+                      </div>
+                    </ons-toolbar>
+                </ons-toolbar>
+                <ons-toolbar style="text-align: center;" class="home-tabs">
+                    <div class="left">
+                        <ons-button modifier="light" class="bg-green">Popular Mountain</ons-button>
+                    </div>
+                    <div class="right">
+                        <ons-button modifier="light" onclick="tab.navi.pushPage('tab-trips.html', { animation : 'slide' });">Upcoming Trips</ons-button>
+                    </div>
+                </ons-toolbar>
+                <ons-row style="text-align: center;">
+                        <!-- <h1>HELLO</h1> -->
+                        <ons-carousel swipeable auto-scroll fullscreen var="carousel">
+                            <ons-carousel-item style="background-color: gray;">
+                              <img class="avatar" src="img/mount-apo.jpg"/>
+                              <div style="text-align: left;">
+                                  <h2 style="margin-bottom: 0px;">Mt. Apo</h2>
+                                  <h4 style="margin-top: 0px;">0 listed trips</h4>
+                                  <p>Davao del Sur and North Cotabato</p>
+                                  <p>Entry point: Brgy. Mainit, Digos</p>
+                                  <p>Specs: Major Climb</p>
+                                  <p>Difficulty 7/9</p>
+                                  <p>Trail class 2-4</p>
+                                  <p>Days required / Hours to summit: 3 days / 10-11 hours</p>
+                              </div>
+                            </ons-carousel-item>
+                            <ons-carousel-item style="background-color: gray;" ng-click="menu.setMainPage('indiv.html', {closeMenu: true})">
+                              <img class="avatar" src="img/mount-pulag.JPG"/>
+                              <div style="text-align: left;">
+                                  <h2 style="margin-bottom: 0px;">Mt. Pulag</h2>
+                                  <h4 style="margin-top: 0px;">2 listed trips</h4>
+                                  <p>Benguet and Nueva Vizcaya</p>
+                                  <p>Entry point:  Brgy. Tinongdan, Itogon, Benguet</p>
+                                  <p>Specs: Major Climb</p>
+                                  <p>Difficulty 8/9</p>
+                                  <p>Trail class 1-4</p>
+                                  <p>Days required / Hours to summits: 4-7 days / 7-10 (U); 30-40 (P)</p>
+                              </div>
+                            </ons-carousel-item>
+                            <ons-carousel-item style="background-color: gray;" >
+                              <img class="avatar" src="img/mount-samat.jpg"/>
+                              <div style="text-align: left;">
+                                  <h2 style="margin-bottom: 0px;">Mt. Samat</h2>
+                                  <h4 style="margin-top: 0px;">0 listed trips</h4>
+                                  <p>Pilar, Bataan</p>
+                                  <p>Entry point: Brgy. Diwa, Pilar</p>
+                                  <p>Specs: Minor Climb</p>
+                                  <p>Difficulty 1/9</p>
+                                  <p>Trail class 1</p>
+                                  <p>Days required / Hours to summit: 1 day / 1 hour</p>
+                              </div>
+                            </ons-carousel-item>
+                            <ons-carousel-item style="background-color: gray;">
+                              <img class="avatar" src="img/mount-pinatubo.jpg"/>
+                              <div style="text-align: left;">
+                                  <h2 style="margin-bottom: 0px;">Mt. Pinatubo</h2>
+                                  <h4 style="margin-top: 0px;">0 listed trips</h4>
+                                  <p>Capas, Tarlac</p>
+                                  <p>Entry point:  Brgy. Sta. Juliana, Capas, Tarlac</p>
+                                  <p>Specs: Minor Climb</p>
+                                  <p>Difficulty 2/9</p>
+                                  <p>Trail class 1</p>
+                                  <p>Days required / Hours to crater: 1 day, 45 min 4×4 + 2 hrs hike</p>
+                              </div>
+                            </ons-carousel-item>
+                            <ons-carousel-item style="background-color: gray;">
+                              <img class="avatar" src="img/mount-makiling.jpg"/>
+                              <div style="text-align: left;">
+                                  <h2 style="margin-bottom: 0px;">Mt. Makiling</h2>
+                                  <h4 style="margin-top: 0px;">0 listed trips</h4>
+                                  <p>Sto. Tomas, Batangas and Los Banos, Laguna</p>
+                                  <p>Entry point:  Sitio Jordan, Brgy. San Miguel, Sto. Tomas</p>
+                                  <p>Specs: Major Climb</p>
+                                  <p>Difficulty 5/9</p>
+                                  <p>Trail class 3 with roped segments</p>
+                                  <p>Hours to Peak 2 / days required: 1-2 days / 5-8 Hours</p>
+                              </div>
+                            </ons-carousel-item>
+                            
+                            
+                        </ons-carousel>
+                </ons-row>
+
+                <a ng-click="menu.setMainPage('create-event.html', {closeMenu: true})" class="create-event-button"><ons-icon icon="fa-pencil" class="ons-icon fa-pencil fa fa-lg"></ons-icon></a>
+        </ons-page>
+    </ons-template>
+
     <ons-template id="tab-trips.html">
         <ons-page>
             <ons-navigator animation="slide" var="tab.navi">
@@ -577,7 +678,7 @@
                               <p class="slots"></ons-icon>2/8 hiker slots</p>
                             </div>
                         </ons-carousel-item>                        
-                        <ons-carousel-item style="background-color: gray;" ng-click="menu.setMainPage('indiv-itinerary.html', {closeMenu: true})">
+                        <ons-carousel-item style="background-color: gray;">
                             <div class="card-list">
                               <div class="img-container">
                                 <img class="avatar" src="img/mount-pulag-2.jpg"/>
@@ -598,134 +699,6 @@
 
                 <a ng-click="menu.setMainPage('create-event.html', {closeMenu: true})" class="create-event-button"><ons-icon icon="fa-pencil" class="ons-icon fa-pencil fa fa-lg"></ons-icon></a>
             </ons-navigator>
-        </ons-page>
-    </ons-template>
-
-    <ons-template id="popular.html">
-        <ons-page>
-            <ons-navigator animation="slide" var="tab.navi">
-                <ons-toolbar>
-                    <div class="left" style="width: 12%;">
-                        <ons-toolbar-button ng-click="menu.toggle()">
-                            <ons-icon icon="ion-navicon" size="28px" fixed-width="false"></ons-icon>
-                        </ons-toolbar-button>
-                    </div>
-                    <div class="center"><img ng-click="menu.setMainPage('popular.html', {closeMenu: true})" src="img/logo.png" class="main-logo" /></div>
-                    <ons-toolbar>
-                      <div class="right" style="width: 40%;">
-                        <div class="search-container" style="padding: 10px 40px;">
-                            <a href="#" ng-click="menu.setMainPage('search.html', {closeMenu: true})" style="color: #1f1f1f;"><ons-icon icon="fa-search" class="ons-icon fa-search fa fa-lg"></ons-icon></i></a>
-                        </div>
-                      </div>
-                    </ons-toolbar>
-                </ons-toolbar>
-                <ons-toolbar style="text-align: center;" class="home-tabs">
-                    <div class="left">
-                        <ons-button modifier="light" class="bg-green">Popular Mountain</ons-button>
-                    </div>
-                    <div class="right">
-                        <ons-button modifier="light" onclick="tab.navi.pushPage('tab-trips.html', { animation : 'slide' });">Upcoming Trips</ons-button>
-                    </div>
-                </ons-toolbar>
-                <ons-row style="text-align: center;">
-                        <!-- <h1>HELLO</h1> -->
-                        <ons-carousel swipeable auto-scroll fullscreen var="carousel">
-                            <ons-carousel-item style="background-color: gray;" ng-click="menu.setMainPage('indiv.html', {closeMenu: true})">
-                              <img class="avatar" src="img/mount-apo.jpg"/>
-                              <div style="text-align: left;">
-                                  <h2 style="margin-bottom: 0px;">Mt. Apo</h2>
-                                  <h4 style="margin-top: 0px;">0 listed trips</h4>
-                                  <p>Davao del Sur and North Cotabato</p>
-                                  <p>Entry point: Brgy. Mainit, Digos</p>
-                                  <p>Specs: Major Climb</p>
-                                  <p>Difficulty 7/9</p>
-                                  <p>Trail class 2-4</p>
-                                  <p>Days required / Hours to summit: 3 days / 10-11 hours</p>
-                              </div>
-                            </ons-carousel-item>
-                            <ons-carousel-item style="background-color: gray;" ng-click="menu.setMainPage('indiv.html', {closeMenu: true})">
-                              <img class="avatar" src="img/mount-pulag.JPG"/>
-                              <div style="text-align: left;">
-                                  <h2 style="margin-bottom: 0px;">Mt. Pulag</h2>
-                                  <h4 style="margin-top: 0px;">2 listed trips</h4>
-                                  <p>Benguet and Nueva Vizcaya</p>
-                                  <p>Entry point:  Brgy. Tinongdan, Itogon, Benguet</p>
-                                  <p>Specs: Major Climb</p>
-                                  <p>Difficulty 8/9</p>
-                                  <p>Trail class 1-4</p>
-                                  <p>Days required / Hours to summits: 4-7 days / 7-10 (U); 30-40 (P)</p>
-                              </div>
-                            </ons-carousel-item>
-                            <ons-carousel-item style="background-color: gray;" ng-click="menu.setMainPage('indiv.html', {closeMenu: true})">
-                              <img class="avatar" src="img/mount-samat.jpg"/>
-                              <div style="text-align: left;">
-                                  <h2 style="margin-bottom: 0px;">Mt. Samat</h2>
-                                  <h4 style="margin-top: 0px;">0 listed trips</h4>
-                                  <p>Pilar, Bataan</p>
-                                  <p>Entry point: Brgy. Diwa, Pilar</p>
-                                  <p>Specs: Minor Climb</p>
-                                  <p>Difficulty 1/9</p>
-                                  <p>Trail class 1</p>
-                                  <p>Days required / Hours to summit: 1 day / 1 hour</p>
-                              </div>
-                            </ons-carousel-item>
-                            <ons-carousel-item style="background-color: gray;" ng-click="menu.setMainPage('indiv.html', {closeMenu: true})">
-                              <img class="avatar" src="img/mount-pinatubo.jpg"/>
-                              <div style="text-align: left;">
-                                  <h2 style="margin-bottom: 0px;">Mt. Pinatubo</h2>
-                                  <h4 style="margin-top: 0px;">0 listed trips</h4>
-                                  <p>Capas, Tarlac</p>
-                                  <p>Entry point:  Brgy. Sta. Juliana, Capas, Tarlac</p>
-                                  <p>Specs: Minor Climb</p>
-                                  <p>Difficulty 2/9</p>
-                                  <p>Trail class 1</p>
-                                  <p>Days required / Hours to crater: 1 day, 45 min 4×4 + 2 hrs hike</p>
-                              </div>
-                            </ons-carousel-item>
-                            <ons-carousel-item style="background-color: gray;" ng-click="menu.setMainPage('indiv.html', {closeMenu: true})">
-                              <img class="avatar" src="img/mount-makiling.jpg"/>
-                              <div style="text-align: left;">
-                                  <h2 style="margin-bottom: 0px;">Mt. Makiling</h2>
-                                  <h4 style="margin-top: 0px;">0 listed trips</h4>
-                                  <p>Sto. Tomas, Batangas and Los Banos, Laguna</p>
-                                  <p>Entry point:  Sitio Jordan, Brgy. San Miguel, Sto. Tomas</p>
-                                  <p>Specs: Major Climb</p>
-                                  <p>Difficulty 5/9</p>
-                                  <p>Trail class 3 with roped segments</p>
-                                  <p>Hours to Peak 2 / days required: 1-2 days / 5-8 Hours</p>
-                              </div>
-                            </ons-carousel-item>
-                            
-                            
-                        </ons-carousel>
-                </ons-row>
-
-                <a ng-click="menu.setMainPage('create-event.html', {closeMenu: true})" class="create-event-button"><ons-icon icon="fa-pencil" class="ons-icon fa-pencil fa fa-lg"></ons-icon></a>
-        </ons-page>
-    </ons-template>
-
-    <ons-template id="page2.html">
-        <ons-page>
-            <ons-toolbar>
-                <div class="left">
-                    <ons-toolbar-button ng-click="menu.toggle()">
-                        <ons-icon icon="ion-navicon" size="28px" fixed-width="false"></ons-icon>
-                    </ons-toolbar-button>
-                </div>
-                <div class="center">Individual Page <a href="#" ng-click="menu.setMainPage('popular.html', {closeMenu: true})">go back</a></div>
-            </ons-toolbar>
-
-
-            <ons-row style="margin-top: 100px; text-align: center;">
-                <ons-col>
-                    <ons-button modifier="light" ng-click="menu.toggleMenu()">
-                        Toggle Menu
-                    </ons-button>
-                </ons-col>
-            </ons-row>
-
-            <div class="create-event-button"><ons-icon icon="fa-pencil" class="ons-icon fa-pencil fa fa-lg"></ons-icon></div>
-
         </ons-page>
     </ons-template>
 
@@ -1073,35 +1046,33 @@
                 <ons-col>
                     <!-- <h1>No Results Found</h1> -->
 
-                    <div ng-init="friends = [{name:'Everest', location:'Laguna', trips: '4'},
-                         {name:'Mt. Pulag', location:'Laguna', trips: '6'},
-                         {name:'Apo', location:'Bulacan', trips: '4'},
-                         {name:'Sembrano', location:'Bulacan', trips: '5'},
-                         {name:'Gunting-gunting', location:'Bulacan', trips: '4'},
-                         {name:'Makiling', location:'Bulacan', trips: '3'}]"></div>
+                    <div ng-init="friends = [{name:'Mt. Apo', location:'Davao Del Sur and North Cotabato', trips: '0', pic: 'img/mount-apo.jpg'},
+                         {name:'Mt. Pulag', location:'Benguet and Nueva Vizcaya', trips: '2', pic: 'img/mount-pulag.jpg'},
+                         {name:'Mt. Samat', location:'Pilar, Bataan', trips: '0', pic: 'img/mount-samat.jpg'},
+                         {name:'Mt. Pinatubo', location:'Capas, Tarlac', trips: '0', pic: 'img/mount-pinatubo.jpg'},
+                         {name:'Mt. Makiling', location:'Sto. Tomas, Batangas and Los Banos, Laguna', trips: '0', pic: 'img/mount-makiling.jpg'}]"></div>
 
                     <!-- <label>Search: <input ng-model="searchText"></label> -->
                     <div ng-repeat="friend in friends | filter:searchText">
-                        <div class="card-mountain" ng-click="menu.setMainPage('page2.html', {closeMenu: true})">
-                            <img class="avatar" src="img/mount1.jpg"/>
+                        <div class="card-mountain" ng-click="menu.setMainPage('indiv.html', {closeMenu: true})">
+                            <img class="avatar" src="{{friend.pic}}"/>
                             <div style="text-align: left;">
-                                <h2 style="margin-bottom: 0px;">{{friend.name}}</h2>
-                                <h4 style="margin-top: 0px;">{{friend.location}}5 listed trips</h4>
+                                <h2 style="margin-bottom: 0px;">{{friend.name}} - {{friend.location}}</h2>
+                                <h4 style="margin-top: 0px;">{{friend.trips}} Listed Trips</h4>
                             </div>
                             <hr>
                         </div>
                     </div>
-                    <h1 style="text-align: left; padding-left: 5%;">Other Results</h1>
+                    <!-- <h1 style="text-align: left; padding-left: 5%;">Other Results</h1>
                     <div ng-repeat="friend in friends | filter:searchText">
-                        <div class="card-mountain" ng-click="menu.setMainPage('page2.html', {closeMenu: true})">
-                            <img class="avatar" src="img/mount1.jpg"/>
+                        <div class="card-mountain" ng-click="menu.setMainPage('indiv.html', {closeMenu: true})">
+                            <img class="avatar" src="{{friend.location}}"/>
                             <div style="text-align: left;">
-                                <h2 style="margin-bottom: 0px;">{{friend.name}}</h2>
-                                <h4 style="margin-top: 0px;">{{friend.location}}5 listed trips</h4>
+                                <h2 style="margin-bottom: 0px;">{{friend.name}} - {{friend.location}}</h2>
                             </div>
                             <hr>
                         </div>
-                    </div>
+                    </div> -->
                 </ons-col>
             </ons-row>
 
